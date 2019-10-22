@@ -79,4 +79,18 @@ sst_hab2
 # plot(sst_hab2)
 writeRaster(sst_hab2,  here("data", "static_habitat2.txt"), format="ascii", overwrite=TRUE, 
             datatype="INT4S")
-  
+######
+sp <- read.csv(here("data", "2019_10_22_acropora_obis.csv"))
+sp
+
+coordinates(sp) <- ~decimalLongitude + decimalLatitude
+crs(sp) <- crs(bath)
+sp <- spTransform(sp, crs(sst_hab2))
+
+plot(sst_hab2)
+points(sp)
+
+sp <- rasterize(sp, sst_hab2, fun=function(x,...)length(x))
+
+writeRaster(sp,  here("data", "initia_dist.txt"), format="ascii", overwrite=TRUE, 
+            datatype="INT4S")
