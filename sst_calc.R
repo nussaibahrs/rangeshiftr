@@ -16,4 +16,17 @@ for (i in 1:length(yr)){
 }
 
 writeRaster(ann, here("Data", "SST_ann.tif"), format = "GTiff", overwrite=TRUE)
-          
+
+##### 
+ann <- stack(here("Data", "SST_ann.tif"))
+names(ann) <- 1870:2018
+
+x11();plot(ann)
+
+for (i in 1:149){
+  temp <- ann[[i]]
+  temp[temp >24 & temp < 28] <- 1
+  temp[temp !=1] <- 0
+  
+  ann[[i]] <- temp
+}
