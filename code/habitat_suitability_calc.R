@@ -6,7 +6,6 @@ fname <- here("big files", "HadISST_sst.nc")
 HadISST.b <- brick(fname)  
 HadISST.b <- crop(HadISST.b, extent(130,  160, -30, -10))
 
-
 ##### static file ####
 static_ann <- calc(HadISST.b, mean, na.rm=TRUE)
 writeRaster(static_ann, here("data", "static_ann.tif"), format="GTiff",
@@ -52,6 +51,9 @@ writeRaster(static_ann, here("data", "static_habitat1.tif"), format="GTiff",
 
 
 ####### habitat
+library(raster)
+library(here)
+
 bath <- raster(here("data", "bathy_5m.tif"))
 bath <- crop(bath, extent(130,  160, -30, -10))
 
@@ -70,3 +72,11 @@ sst_hab[sst_hab == 2] <- 1
 plot(sst_hab)
 
 writeRaster(sst_hab, here("data", "static_habitat2.tif"), format="GTiff", overwrite=TRUE)
+
+new_proj <- "+proj=utm +zone=55 +south +units=m +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
+sst_hab2 <- projectRaster(sst_hab, crs=new_proj, res=8000) #convert to meters
+sst_hab2
+# plot(sst_hab2)
+writeRaster(sst_hab2,  here("data", "static_habitat2.txt"), format="ascii", overwrite=TRUE, 
+            datatype="INT4S")
+  
