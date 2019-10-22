@@ -15,5 +15,5 @@ for (i in 1:length(yr)){
   ann <- stack(ann,calc(HadISST.b[[(i+1):yr[i+1]]], mean))
 }
 
-          
+writeRaster(ann, here("Data", "SST_ann.tif"), format = "GTiff", overwrite=TRUE)
           
