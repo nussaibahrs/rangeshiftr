@@ -90,7 +90,9 @@ sp <- spTransform(sp, crs(sst_hab2))
 plot(sst_hab2)
 points(sp)
 
-sp <- rasterize(sp, sst_hab2, fun=function(x,...)length(x))
+sp <- rasterize(sp,field = "genusid", sst_hab2, fun=function(x,...)length(x))
+sp[sp > 0] <- 1
 
 writeRaster(sp,  here("data", "initia_dist.txt"), format="ascii", overwrite=TRUE, 
             datatype="INT4S")
+
