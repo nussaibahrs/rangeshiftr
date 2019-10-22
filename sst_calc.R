@@ -1,8 +1,10 @@
 library(here)
 library(raster)
+library(ncdf4)
 
-fname <- here("sst_data", "HadISST_sst.nc")
+fname <- here("Data", "HadISST_sst.nc")
 HadISST.b <- brick(fname)  
+HadISST.b <- crop(HadISST.b, extent(130,  160, -30, -10))
 
 yr <- seq(0, 1796, 12)
 
