@@ -2,9 +2,15 @@ library(here)
 library(raster)
 library(ncdf4)
 
-fname <- here("Data", "HadISST_sst.nc")
+fname <- here("big files", "HadISST_sst.nc")
 HadISST.b <- brick(fname)  
 HadISST.b <- crop(HadISST.b, extent(130,  160, -30, -10))
+
+
+##### static file ####
+static_ann <- calc(HadISST.b, mean, na.rm=TRUE)
+writeRaster(static_ann, here("Data", "static_ann.tif"), format="GTiff",
+            overwrite=TRUE)
 
 yr <- seq(0, 1796, 12)
 
@@ -30,3 +36,15 @@ for (i in 1:149){
   
   ann[[i]] <- temp
 }
+
+x11();plot(ann)
+
+#### static SST
+static_ann <- raster(here("Data", "static_ann.tif"))
+static_ann[static_ann > 24 & static_ann < 28] <- 1
+static_ann[static_ann !=1] <- 0
+
+plot(static_ann)
+
+writeRaster(static_ann, here("Data", "static_habitat1.tif"), format="GTiff",
+            overwrite=TRUE)
