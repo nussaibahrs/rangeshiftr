@@ -60,7 +60,7 @@ sst_hab <- raster(here("Data", "static_habitat1.tif"))
 sst_hab <- resample(sst_hab, bath)
 plot(sst_hab)
 
-sst_hab[bath < 25 & sst_hab > 0] <- 2
+sst_hab[abs(bath) < 25 & sst_hab > 0] <- 2 #bathymetry in negative values
 plot(sst_hab)
 
 sst_hab[sst_hab != 2] <- 0
@@ -69,3 +69,4 @@ plot(sst_hab)
 sst_hab[sst_hab == 2] <- 1
 plot(sst_hab)
 
+writeRaster(sst_hab, here("Data", "static_habitat2.tif"), format="GTiff", overwrite=TRUE)
