@@ -15,7 +15,7 @@ k=0.15
 land <- ImportedLandscape(LandscapeFile = "static_habitat2.txt",
                           Resolution = 8000,
                           Nhabitats = 2,
-                          K = c(0,.k),
+                          K = c(0,k),
                           SpDistFile = "initial_dist.txt",
                           SpDistResolution = 8000)
 
@@ -57,22 +57,55 @@ s <- RSsim(land = land, demog = demo, dispersal = disp,
 # run simulation
 RunRS(s, dirpath)
 
-
-
-### plot results
+###### plot results ######
 range_df <- readRange(s, dirpath)
 par(mfrow=c(1,2))
 plotAbundance(range_df)
 plotOccupancy(range_df)
 
+### plot results
+range_df <- readRange(s, dirpath)
+par(mfrow=c(1,2))
+plotAbundance(range_df)
+
+par(mfrow=c(1,2))
+plotAbundance(range_df, rep=F, sd=T)
+plotOccupancy(range_df, rep=F, sd=T)
+plotOccupancy(range_df)
+
+#map mean abundance ######
+pop_df_long <- readPop(s, dirpath)
+
+suit <- raster(here("demo", "Inputs", "static_habitat2.txt"))
+aust <- rgdal::readOGR(here("data"), "australia")
+plot(suit)
+
+xmin <- extent(suit)[1]
+ymin <- extent(suit)[3]
 
 
-x11()
-new_proj <- "+proj=utm +zone=55 +south +units=m +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
-# worldmap
 
-coast <- raster(here("demo", "Inputs", "static_habitat2.txt"))
+temp <- pop_df_long %>% group_by(x,y, Year) %>%
+      summarise(m = mean(NInd)) %>%
+  ungroup() %>%
+  mutate(x = xmin + x,
+         y = ymin+y)
+####
 
-x11()
-plot(coast)
-points(min_Y~min_X, data=range_df)
+wards.count <- nrow(aust@data)
+# assign id for each lsoa
+
+aust@data$id <- 1:wards.count
+wards.fort <- fortify(aust, region='id')
+
+p <-ggplot(wards.fort, aes(long, lat, group=group)) + 
+  geom_polygon(colour='transparent', fill='lightgrey')+
+  theme_minimal()+
+  geom_point(data=temp, aes(x=x, y=y, col=Year), inherit.aes = FALSE)
+
+library(gganimate)
+
+p + transition_time(Year) +
+  labs(title = "Year: {frame_time}")
+
+anim_save("anim.gif")

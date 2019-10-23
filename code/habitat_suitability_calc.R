@@ -82,6 +82,7 @@ sst_hab2[sst_hab2 < 1] <- 0
 # plot(sst_hab2)
 writeRaster(sst_hab2+1,  here("data", "static_habitat2.txt"), format="ascii", overwrite=TRUE, 
             datatype="INT4S")
+
 sst_hab3 <- projectRaster(sst_hab2, res=1000, crs=crs(sst_hab2))
 sst_hab3[sst_hab3 > 0] <- 1
 sst_hab3[sst_hab3 < 1] <- 0

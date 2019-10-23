@@ -21,6 +21,7 @@ writeOGR(aust, here("data"), "australia", driver="ESRI Shapefile")
 library(here)
 library(raster)
 library(rgdal)
+library(RangeshiftR)
 
 aust <- readOGR(here("data"), "australia")
 extent(aust)
@@ -37,6 +38,7 @@ brks <- c(-1, -25, -50, -100, -500)
 bath_c <- rasterToContour(bath, levels=brks)
 bath_c
 
-x11(w=5.9, h=4.7);plot(temperature, xlim=c(-1e6, 1e6), ylim=c(7e6, 85e5))
+x11(w=5.9, h=4.7);plot(temperature)
 plot(bath_c, add=TRUE)
 plot(aust, add=TRUE, col="white")
+
