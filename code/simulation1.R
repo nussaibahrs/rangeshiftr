@@ -64,14 +64,9 @@ plotAbundance(range_df)
 plotOccupancy(range_df)
 
 ### plot results
-range_df <- readRange(s, dirpath)
-par(mfrow=c(1,2))
-plotAbundance(range_df)
-
 par(mfrow=c(1,2))
 plotAbundance(range_df, rep=F, sd=T)
 plotOccupancy(range_df, rep=F, sd=T)
-plotOccupancy(range_df)
 
 #map mean abundance ######
 pop_df_long <- readPop(s, dirpath)
@@ -116,6 +111,7 @@ p <-ggplot(wards.fort, aes(long, lat, group=group)) +
   theme_minimal()+
   geom_point(data=temp, aes(x=x, y=y, col=Year), inherit.aes = FALSE)
 
+install.packages("gifski")
 library(gganimate)
 
 p + transition_time(Year) +
