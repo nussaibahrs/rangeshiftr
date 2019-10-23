@@ -110,8 +110,10 @@ p <-ggplot(wards.fort, aes(long, lat, group=group)) +
   geom_polygon(colour='transparent', fill='lightgrey')+
   theme_minimal()+
   geom_point(data=temp, aes(x=x, y=y, col=Year), inherit.aes = FALSE)+
-  scale_colour_gradient(low = "coral", high = "#56B4E9")+
-  xlim(-1250000, 2500000)
+  scale_colour_gradient(low = "coral", high = "#56B4E9") +
+  coord_equal()
+
+p
 
 install.packages("gifski")
 library(gganimate)
@@ -120,6 +122,6 @@ anim.gif <- p + transition_time(Year) +
   labs(title = "Year: {frame_time}")
 
 # improve the gif
-anim1 <- animate(anim.gif, fps = 14, duration = 30, rewind = F)
+anim1 <- animate(anim.gif, fps = 10, duration = 30, rewind = F)
 
-anim_save("anim1")
+anim_save("anim1.gif", anim1)
