@@ -1,0 +1,99 @@
+RangeShifter 2.0  -  64 bit implementation
+================     =====================
+
+BATCH MODE 	yes
+REPLICATES 	5
+YEARS 	100
+REPRODUCTIVE SEASONS / YEAR	1
+CELL-BASED MODEL
+BOUNDARIES 	reflective
+
+LANDSCAPE:	imported map
+TYPE: 	habitat codes
+FILE NAME:  (see batch file) 
+No. HABITATS:	2
+RESOLUTION (m): 	8000
+DIMENSIONS:  X 426  Y 302
+AVAILABLE:   min.X 0 min.Y 0  max.X 425 max.Y 301
+
+SPECIES DISTRIBUTION UPLOADED: 	yes
+RESOLUTION (m)	8000
+FILE NAME:  (see batch file) 
+
+ENVIRONMENTAL GRADIENT:	 no
+ENVIRONMENTAL STOCHASTICITY:	no
+LOCAL EXTINCTION PROBABILITY:	0.0
+
+SPECIES' PARAMETERS.
+REPRODUCTION:
+TYPE: Sexual model (simple)
+PROP. of MALES	0.5
+STAGE STRUCTURE:	yes
+PROBABILITY OF REPRODUCING IN SUBSEQUENT SEASONS	1
+No. OF REP. SEASONS BEFORE SUBSEQUENT REPRODUCTIONS	0
+No. STAGES	2
+MAX. AGE	10000
+MIN. AGES:
+stage	0:	0	years
+stage	1:	0	years
+FECUNDITIES:
+stage	0:	0
+stage	1:	5
+DEVELOPMENT PROB.:
+stage	0:	1
+stage	1:	0
+SURVIVAL PROB.:
+stage	0:	1
+stage	1:	0.8
+SCHEDULING OF SURVIVAL: Annually
+DENSITY-DEPENDENCE IN FECUNDITY:	yes
+not stage-dependent
+DENSITY-DEPENDENCE IN DEVELOPMENT:	no
+DENSITY-DEPENDENCE IN SURVIVAL:		no
+
+HABITAT SPECIFIC 1/b:
+Habitat 1: 	1/b 0
+Habitat 2: 	1/b 0.15
+
+DISPERSAL - EMIGRATION:	density-dependent
+SEX-DEPENDENT:   no
+STAGE-DEPENDENT: yes
+INDIVIDUAL VARIABILITY: no
+stage 0: 	D0: 0.5 	alpha: 10 	beta: 1
+stage 1: 	D0: 0 	alpha: 0 	beta: 0
+
+DISPERSAL - TRANSFER: 	dispersal kernel
+TYPE: 	negative exponential
+SEX-DEPENDENT:   no
+STAGE-DEPENDENT: no
+INDIVIDUAL VARIABILITY: no
+MEAN DISTANCE I: 	8000
+DISPERSAL MORTALITY:   constant
+MORTALITY PROBABILITY: 0
+
+DISPERSAL - SETTLEMENT:
+SEX-DEPENDENT:   no
+STAGE-DEPENDENT: no
+IF THE ARRIVAL CELL/PATCH IS UNSUITABLE: die
+MATING REQUIREMENTS: no
+
+GENETICS:
+No. of variable traits:  0
+
+INITIALISATION CONDITIONS:
+From species distribution: 	
+some random presence cells/patches
+INITIAL NO. OF INDIVIDUALS: 	at half carrying capacity
+INITIAL STAGE PROPORTIONS:
+stage 1: 1 	
+Initial age distribution: quasi-equilibrium
+GEOGRAPHICAL CONSTRAINTS (cell numbers): 
+min X: 0 max X: 425
+min Y: 0 max Y: 301
+
+OUTPUTS:
+Range - every 5 years
+Occupancy - every 5 years
+Populations - every 5 years
+SAVE MAPS: no
+SAVE TRAITS MAPS: no
