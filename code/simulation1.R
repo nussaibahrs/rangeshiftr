@@ -73,7 +73,20 @@ pop_df_long <- readPop(s, dirpath)
 
 suit <- raster(here("demo", "Inputs", "static_habitat2.txt"))
 aust <- rgdal::readOGR(here("data"), "australia")
+bbox(aust)
+
+plot(bbox(aust), )
+plot(aust, xlim=c(0, 1e06))
 plot(suit)
+
+x11(w=5.9, h=4.8)
+plot(0,0, xlim=c(-1e6, 14e5), ylim=c(6.8e6, 8.7e6), 
+     xlab="Longitude", ylab="Latitude")
+plot(suit, add=TRUE, 
+     legend=FALSE, col=c("grey90", "darkgreen"))
+plot(aust, add=TRUE, col="white", border=NA)
+legend("topright", fill=c("grey90", "darkgreen"), legend=c("Unsuitable","Suitable"),
+       bg="white")
 
 xmin <- extent(suit)[1]
 ymin <- extent(suit)[3]
