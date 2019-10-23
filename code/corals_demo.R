@@ -17,3 +17,6 @@ points(dat$paleolng, dat$paleolat)
 library(robis)
 coral.occ <- occurrence("Acropora")
 unique(coral.occ$basisOfRecord)
+
+
+write.csv(hyac ,file = "hyac.csv", row.names = F)
