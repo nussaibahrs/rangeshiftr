@@ -74,7 +74,7 @@ plot(sst_hab)
 writeRaster(sst_hab, here("data", "static_habitat2.tif"), format="GTiff", overwrite=TRUE)
 
 new_proj <- "+proj=utm +zone=55 +south +units=m +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
-sst_hab2 <- projectRaster(sst_hab, crs=new_proj, res=8000) #convert to meters
+sst_hab2 <- projectRaster(sst_hab, crs=new_proj, res=4000) #convert to meters
 sst_hab2
 sst_hab2[sst_hab2 > 0] <- 1
 sst_hab2[sst_hab2 < 1] <- 0
@@ -102,6 +102,7 @@ sp <- rasterize(sp,field = "genusid", sst_hab2, fun=function(x,...)length(x))
 sp[sp > 0] <- 1
 sp[sp <1 | is.na(sp)] <- 0
 
-writeRaster(sp,  here("data", "initia_dist.txt"), format="ascii", overwrite=TRUE, 
+writeRaster(sp,  here("data", "initial_dist.txt"), format="ascii", overwrite=TRUE, 
             datatype="INT4S")
+
 

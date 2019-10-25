@@ -10,17 +10,21 @@ dir.create(here("demo","Outputs"), showWarnings = TRUE)
 dir.create(here("demo", "Output_Maps"), showWarnings = TRUE)
 
 #carry capacity
-k=0.15
+k=0.25 # half k as we increased resolution
+
 # set up the landscape settings
 land <- ImportedLandscape(LandscapeFile = "static_habitat2.txt",
-                          Resolution = 8000,
+                          Resolution = 4000,
                           Nhabitats = 2,
                           K = c(0,k),
                           SpDistFile = "initial_dist.txt",
                           SpDistResolution = 8000)
 
 # transition matrix
-trans_mat <- matrix(c(0, 1, 5, 0.8), 
+trans_mat <- matrix(c(0, 1, 5, 0.6), # I decreased survivalrate of adults
+                    # 0 means no adult can go back to the first stage (larvae)
+                    # 1 means all 5 initial larvae survive and develop into adults
+                    # 0.6 means survival rate of adult stages 
                     nrow = 2, byrow = F)
 
 demo <- Demography(ReproductionType = 1,                   # simple sexual model
@@ -30,8 +34,10 @@ demo <- Demography(ReproductionType = 1,                   # simple sexual model
                                                 SurvSched=2, 
                                                 FecDensDep=T))
 disp <-  Dispersal(Emigration = Emigration(DensDep=T, StageDep=T, 
-                                           EmigProb = cbind(0:1,c(0.5,0),c(10.0,0),c(1.0,0)) ), 
-                   Transfer = DispersalKernel(Distances = 8000), 
+                                           EmigProb = cbind(0:1,c(0.3,0),c(10.0,0),c(1.0,0)) ), 
+                                              # I guess the second row first column is the 
+                                              # immigration probability and set it to 0.3 from 0.5
+                   Transfer = DispersalKernel(Distances = 4000),  # same as resolution
                    Settlement = Settlement(FindMate = F) )
 
 # initialisation
