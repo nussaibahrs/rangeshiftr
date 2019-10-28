@@ -3,7 +3,7 @@ RangeShifter 2.0  -  64 bit implementation
 
 BATCH MODE 	yes
 REPLICATES 	5
-YEARS 	100
+YEARS 	200
 REPRODUCTIVE SEASONS / YEAR	1
 CELL-BASED MODEL
 BOUNDARIES 	reflective
@@ -38,13 +38,13 @@ stage	0:	0	years
 stage	1:	0	years
 FECUNDITIES:
 stage	0:	0
-stage	1:	5
+stage	1:	2
 DEVELOPMENT PROB.:
 stage	0:	1
 stage	1:	0
 SURVIVAL PROB.:
 stage	0:	1
-stage	1:	0.6
+stage	1:	0.4
 SCHEDULING OF SURVIVAL: Annually
 DENSITY-DEPENDENCE IN FECUNDITY:	yes
 not stage-dependent
@@ -59,7 +59,7 @@ DISPERSAL - EMIGRATION:	density-dependent
 SEX-DEPENDENT:   no
 STAGE-DEPENDENT: yes
 INDIVIDUAL VARIABILITY: no
-stage 0: 	D0: 0.3 	alpha: 10 	beta: 1
+stage 0: 	D0: 0.1 	alpha: 10 	beta: 1
 stage 1: 	D0: 0 	alpha: 0 	beta: 0
 
 DISPERSAL - TRANSFER: 	dispersal kernel
@@ -92,8 +92,8 @@ min X: 0 max X: 425
 min Y: 0 max Y: 301
 
 OUTPUTS:
-Range - every 5 years
-Occupancy - every 5 years
-Populations - every 5 years
+Range - every 10 years
+Occupancy - every 10 years
+Populations - every 10 years
 SAVE MAPS: no
 SAVE TRAITS MAPS: no

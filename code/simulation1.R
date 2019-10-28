@@ -9,7 +9,7 @@ dir.create(here("demo", "Inputs"), showWarnings = TRUE)
 dir.create(here("demo","Outputs"), showWarnings = TRUE)
 dir.create(here("demo", "Output_Maps"), showWarnings = TRUE)
 
-#carry capacity
+#carrying capacity
 k=0.25 # half k as we increased resolution
 
 # set up the landscape settings
